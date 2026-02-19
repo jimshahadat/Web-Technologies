@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+
+    <h1>Student Registration Form</h1>
+
+    <form action="#" method="post">
+
+
+        <fieldset>
+            <legend>Personal Information</legend>
+
+            <p>
+                <label for="fullname">Full Name:</label>
+                <input type="text" id="fullname" name="fullname" required>
+            </p>
+
+            <p>
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required>
+            </p>
+
+            <p>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </p>
+
+            <p>
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob">
+            </p>
+
+            <p>Gender:</p>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label>
+
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label>
+
+            <input type="radio" id="other" name="gender" value="other">
+            <label for="other">Other</label>
+
+        </fieldset>
+
+        <br>
+
+
+        <fieldset>
+            <legend>Academic Information</legend>
+
+            <p>
+                <label for="department">Department:</label>
+                <select id="department" name="department">
+                    <option value="cs">Computer Science</option>
+                    <option value="se">Software Engineering</option>
+                    <option value="it">Information Technology</option>
+                    <option value="ds">Data Science</option>
+                </select>
+            </p>
+
+            <p>Skills:</p>
+
+            <input type="checkbox" id="html" name="skills" value="html">
+            <label for="html">HTML</label>
+
+            <input type="checkbox" id="css" name="skills" value="css">
+            <label for="css">CSS</label>
+
+            <input type="checkbox" id="js" name="skills" value="javascript">
+            <label for="js">JavaScript</label>
+
+            <input type="checkbox" id="python" name="skills" value="python">
+            <label for="python">Python</label>
+
+        </fieldset>
+
+        <br>
+
+
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+
+    </form>
+
+</body>
+</html>
