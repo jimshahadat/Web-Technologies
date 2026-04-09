@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Manager</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f3f6f9;
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+}
+
+.container {
+    background: #fff;
+    padding: 20px;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+input, button {
+    padding: 8px;
+    margin: 5px 0;
+    width: 100%;
+}
+
+button {
+    background: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+li {
+    list-style: none;
+    padding: 8px;
+    margin: 5px 0;
+    background: #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.present {
+    background: #c8f7c5;
+}
+
+.highlight {
+    border: 2px solid red;
+}
+
+.small {
+    font-size: 14px;
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Student Manager</h3>
+
+    <!-- Name + Roll -->
+    <input type="text" id="name" placeholder="Student Name">
+    <input type="text" id="roll" placeholder="Roll No">
+
+    <!-- Add -->
+    <button id="addBtn" disabled>Add Student</button>
+
+    <!-- Search -->
+    <input type="text" id="search" placeholder="Search student">
+
+    <!-- Buttons -->
+    <button onclick="sortStudents()">Sort A–Z</button>
+    <button onclick="highlightFirst()">Highlight First Student</button>
+
+    <!-- List -->
+    <ul id="list"></ul>
+
+    <!-- Counts -->
+    <p id="total">Total students: 0</p>
+    <p id="attendance">Present: 0, Absent: 0</p>
+
+</div>
+
+<script>
+const nameInput = document.getElementById("name");
+const rollInput = document.getElementById("roll");
+const addBtn = document.getElementById("addBtn");
+const list = document.getElementById("list");
+const totalText = document.getElementById("total");
+const attendanceText = document.getElementById("attendance");
+const searchInput = document.getElementById("search");
+
+// 3. Enable/Disable Add Button
+nameInput.addEventListener("input", () => {
+    addBtn.disabled = nameInput.value.trim() === "";
+});
+
+// 1. Add Student
+addBtn.onclick = () => {
+    const name = nameInput.value.trim();
+    const roll = rollInput.value.trim();
+
+    if (!name || !roll) return;
+
+    const li = document.createElement("li");
+
+    li.innerHTML = `
+        <span class="text">${roll} – ${name}</span>
+        <div>
+            <input type="checkbox" class="presentBox">
+            <button onclick="editStudent(this)">Edit</button>
+            <button onclick="deleteStudent(this)">Delete</button>
+        </div>
+    `;
+
+    list.appendChild(li);
+
+    nameInput.value = "";
+    rollInput.value = "";
+    addBtn.disabled = true;
+
+    updateCounts();
+};
+
+// 2. Update Counts
+function updateCounts() {
+    const items = list.querySelectorAll("li");
+    totalText.textContent = "Total students: " + items.length;
+
+    let present = 0;
+    items.forEach(li => {
+        if (li.classList.contains("present")) present++;
+    });
+
+    attendanceText.textContent = `Present: ${present}, Absent: ${items.length - present}`;
+}
+
+// 7. Delete with Confirm
+function deleteStudent(btn) {
+    if (confirm("Are you sure you want to delete this student?")) {
+        btn.closest("li").remove();
+        updateCounts();
+    }
+}
+
+// 1. Edit Student
+function editStudent(btn) {
+    const li = btn.closest("li");
+    const text = li.querySelector(".text").textContent;
+
+    const [roll, name] = text.split(" – ");
+
+    const newName = prompt("Edit name:", name);
+    const newRoll = prompt("Edit roll:", roll);
+
+    if (newName && newRoll) {
+        li.querySelector(".text").textContent = `${newRoll} – ${newName}`;
+    }
+}
+
+// 5. Present/Absent Toggle
+list.addEventListener("change", (e) => {
+    if (e.target.classList.contains("presentBox")) {
+        const li = e.target.closest("li");
+
+        if (e.target.checked) {
+            li.classList.add("present");
+        } else {
+            li.classList.remove("present");
+        }
+
+        updateCounts();
+    }
+});
+
+// 4. Search Filter
+searchInput.addEventListener("input", () => {
+    const value = searchInput.value.toLowerCase();
+    const items = list.querySelectorAll("li");
+
+    items.forEach(li => {
+        const text = li.querySelector(".text").textContent.toLowerCase();
+
+        li.style.display = text.includes(value) ? "flex" : "none";
+    });
+});
+
+// 6. Sort A–Z
+function sortStudents() {
+    const items = Array.from(list.querySelectorAll("li"));
+
+    items.sort((a, b) => {
+        const nameA = a.querySelector(".text").textContent.toLowerCase();
+        const nameB = b.querySelector(".text").textContent.toLowerCase();
+        return nameA.localeCompare(nameB);
+    });
+
+    items.forEach(li => list.appendChild(li));
+}
+
+// 8. Highlight First
+function highlightFirst() {
+    const items = list.querySelectorAll("li");
+
+    items.forEach(li => li.classList.remove("highlight"));
+
+    if (items.length > 0) {
+        items[0].classList.add("highlight");
+    }
+}
+</script>
+
+</body>
+</html>
