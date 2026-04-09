@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Portfolio</title>
+
+<link rel="stylesheet" href="./style/style.css">
+
+</head>
+
+<body>
+
+<header>
+<h1>Jim Shahadat</h1>
+<nav>
+<a href="#home">Home</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contact</a>
+<button id="themeToggle">🌙</button>
+</nav>
+</header>
+
+<main>
+
+<!-- HOME -->
+<section id="home" class="hero">
+
+<h2 id="typing"></h2>
+
+<p>I am a Computer Science student passionate about Web Development,
+Machine Learning and Software Engineering.</p>
+
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+
+<h2>My Projects</h2>
+
+<div id="projectContainer" class="project-grid"></div>
+
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+
+<h2>Contact Me</h2>
+
+<form id="contactForm">
+
+<input type="text" id="name" placeholder="Your Name">
+<span class="error" id="nameError"></span>
+
+<input type="email" id="email" placeholder="Your Email">
+<span class="error" id="emailError"></span>
+
+<input type="text" id="subject" placeholder="Subject">
+<span class="error" id="subjectError"></span>
+
+<textarea id="message" placeholder="Message"></textarea>
+<span class="error" id="messageError"></span>
+
+<button type="submit">Send Message</button>
+
+</form>
+
+</section>
+
+</main>
+
+<footer>
+
+<p>© 2026 Jim Shahadat Portfolio</p>
+
+</footer>
+
+<button id="topBtn">↑</button>
+
+<script src="script.js"></script>
+
+</body>
+</html>
