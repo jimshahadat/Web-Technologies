@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AJAX Test</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            width: 320px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            background: #667eea;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #5a67d8;
+        }
+
+        .card {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background: #f5f7ff;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .loading {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(10px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>AJAX + JSON</h2>
+
+    <button onclick="loadData()">Load Data</button>
+    <button onclick="clearData()">Clear</button>
+
+    <div id="loading" class="loading"></div>
+    <div id="result"></div>
+</div>
+
+<script src="script_js.js"></script>
+
+</body>
+</html>
